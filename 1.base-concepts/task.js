@@ -1,10 +1,16 @@
-"use strict"
-function solveEquation(a, b, c) {
-  let arr = [];
-  
-  return arr;
-}
+function getArrayParams(...arr) {
+  if (arr.length === 0) {
+    return {
+      min: undefined,
+      max: undefined,
+      avg: undefined,
+    };
+  }
 
-function calculateTotalMortgage(percent, contribution, amount, countMonths) {
-  
+  const min = Math.min(...arr);
+  const max = Math.max(...arr);
+  const sum = arr.reduce((acc, curr) => acc + curr, 0);
+  const avg = +(sum / arr.length).toFixed(2);
+
+  return { min, max, avg };
 }
