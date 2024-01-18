@@ -5,6 +5,14 @@ class PrintEditionItem {
 		this.pagesCount = pagesCount;
 		this.state = state;
 		this.type = type;
+
+    get type() {
+            return this._type;
+        }
+    
+    set type(newType) {
+            this._type = newType;
+        }    
 	}
 
 	fix() {
@@ -93,10 +101,11 @@ class Library {
 	}
 
 	addBook(book) {
-		if (book.state > 30) {
-			this.books.push(book);
-		}
-	}
+        if (book.state > 30) {
+            book.type = book.type || null; // Установка значения type, если оно не установлено
+            this.books.push(book);
+        }
+    }
 
 	findBookBy(type, value) {
 		return this.books.find(book => book[type] === value);
