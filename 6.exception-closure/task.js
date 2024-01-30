@@ -1,5 +1,5 @@
 ﻿function parseCount(value) {
-    const parsedValue = Number.parseInt(value, 10);
+    const parsedValue = Number.parseFloat(value);
     if (isNaN(parsedValue)) {
       throw new Error("Невалидное значение");
     }
@@ -41,8 +41,12 @@
       return new Triangle(a, b, c);
     } catch (error) {
       return {
-        perimeter: () => "Ошибка! Треугольник не существует",
-        area: () => "Ошибка! Треугольник не существует",
+        get perimeter() {
+          return "Ошибка! Треугольник не существует";
+        },
+        get area() {
+          return "Ошибка! Треугольник не существует";
+        },
       };
     }
   }
