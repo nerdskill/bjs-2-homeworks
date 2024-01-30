@@ -39,12 +39,20 @@ function parseCount(value) {
   }
   
   function getTriangle(a, b, c) {
-    try {
-      return new Triangle(a, b, c);
-    } catch (error) {
+    if (a !== undefined && b !== undefined && c !== undefined) {
+      try {
+        const triangle = new Triangle(a, b, c);
+        return triangle;
+      } catch (error) {
+        return {
+          perimeter: () => "Ошибка! Треугольник не существует",
+          area: () => "Ошибка! Треугольник не существует",
+        };
+      }
+    } else {
       return {
         perimeter: () => "Ошибка! Треугольник не существует",
         area: () => "Ошибка! Треугольник не существует",
       };
     }
-  }  
+  }
