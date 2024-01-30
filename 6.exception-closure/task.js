@@ -1,13 +1,11 @@
-﻿// Функция parseCount для парсинга значения
-function parseCount(value) {
-    const parsedValue = Number.parseFloat(value);
+﻿function parseCount(value) {
+    const parsedValue = Number.parseInt(value, 10);
     if (isNaN(parsedValue)) {
       throw new Error("Невалидное значение");
     }
     return parsedValue;
   }
   
-  // Функция validateCount для валидации значения
   function validateCount(value) {
     try {
       return parseCount(value);
@@ -34,22 +32,14 @@ function parseCount(value) {
     get area() {
       const s = this.perimeter / 2;
       const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
-      return +area.toFixed(3); // Округление до трёх знаков после запятой
+      return +area.toFixed(3);
     }
   }
   
   function getTriangle(a, b, c) {
-    if (a !== undefined && b !== undefined && c !== undefined) {
-      try {
-        const triangle = new Triangle(a, b, c);
-        return triangle;
-      } catch (error) {
-        return {
-          perimeter: () => "Ошибка! Треугольник не существует",
-          area: () => "Ошибка! Треугольник не существует",
-        };
-      }
-    } else {
+    try {
+      return new Triangle(a, b, c);
+    } catch (error) {
       return {
         perimeter: () => "Ошибка! Треугольник не существует",
         area: () => "Ошибка! Треугольник не существует",
