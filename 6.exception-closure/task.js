@@ -42,18 +42,8 @@ function getTriangle(a, b, c) {
     try {
         const triangle = new Triangle(a, b, c);
 
-        // Используем Object.defineProperty, чтобы сделать свойства только для чтения
-        Object.defineProperty(triangle, 'perimeter', {
-            value: triangle.perimeter,
-            writable: false
-        });
-
-        Object.defineProperty(triangle, 'area', {
-            value: triangle.area,
-            writable: false
-        });
-
-        return triangle;
+        // Используем Object.freeze(), чтобы сделать объект только для чтения
+        return Object.freeze(triangle);
     } catch (error) {
         return {
             area: 'Ошибка! Треугольник не существует',
