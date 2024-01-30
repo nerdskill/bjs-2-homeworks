@@ -18,32 +18,34 @@ function validateCount(value) {
 
 class Triangle {
     constructor(a, b, c) {
-        if (a + b <= c || a + c <= b || b + c <= a) {
+        if (!this.isValidTriangle(a, b, c)) {
             throw new Error("Треугольник с такими сторонами не существует");
         }
 
-        this._a = a;
-        this._b = b;
-        this._c = c;
+        this.sideA = a;
+        this.sideB = b;
+        this.sideC = c;
+        Object.freeze(this); // Замораживаем объект, чтобы нельзя было изменять его свойства
+    }
+
+    isValidTriangle(a, b, c) {
+        return a + b > c && b + c > a && a + c > b;
     }
 
     get perimeter() {
-        return this._a + this._b + this._c;
+        return this.sideA + this.sideB + this.sideC;
     }
 
     get area() {
         const p = this.perimeter / 2;
-        const area = Math.sqrt(p * (p - this._a) * (p - this._b) * (p - this._c));
-        return parseFloat(area.toFixed(3));
+        const area = Math.sqrt(p * (p - this.sideA) * (p - this.sideB) * (p - this.sideC));
+        return parseFloat(area.toFixed(3)); // Округляем до трёх знаков после запятой
     }
 }
 
 function getTriangle(a, b, c) {
     try {
-        const triangle = new Triangle(a, b, c);
-
-        // Используем Object.freeze(), чтобы сделать объект только для чтения
-        return Object.freeze(triangle);
+        return new Triangle(a, b, c);
     } catch (error) {
         return {
             area: 'Ошибка! Треугольник не существует',
