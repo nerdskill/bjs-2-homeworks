@@ -40,13 +40,7 @@ function parseCount(value) {
   
   function getTriangle(a, b, c) {
     try {
-      const triangle = new Triangle(a, b, c);
-  
-      // Запрет на изменение свойств
-      return Object.freeze({
-        perimeter: triangle.perimeter,
-        area: triangle.area
-      });
+      return new Triangle(a, b, c);
     } catch (error) {
       return {
         perimeter: () => "Ошибка! Треугольник не существует",
