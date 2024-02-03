@@ -22,8 +22,18 @@ class AlarmClock {
     }
   
     removeClock(time) {
-      this.alarmCollection = this.alarmCollection.filter(alarm => alarm.time !== time);
-    }
+        let indexToRemove = -1;
+      
+        this.alarmCollection.forEach((alarm, index) => {
+          if (alarm.time === time) {
+            indexToRemove = index;
+          }
+        });
+      
+        if (indexToRemove !== -1) {
+          this.alarmCollection.splice(indexToRemove, 1);
+        }
+      }
   
     getCurrentFormattedTime() {
       const currentDate = new Date();
