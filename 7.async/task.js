@@ -9,12 +9,17 @@ class AlarmClock {
             throw new Error('Отсутствуют обязательные аргументы');
         }
 
-        if (this.alarmCollection.some(alarm => alarm.time === time)) {
+        const existingAlarm = this.alarmCollection.find(alarm => alarm.time === time);
+        if (existingAlarm) {
             console.warn('Уже присутствует звонок на это же время');
             return;
         }
 
-        this.alarmCollection.push({ time, callback, canCall: true });
+        this.alarmCollection.push({
+            time: time,
+            callback: callback,
+            canCall: true
+        });
     }
 
     removeClock(time) {
@@ -23,7 +28,9 @@ class AlarmClock {
 
     getCurrentFormattedTime() {
         const now = new Date();
-        return `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        return `${hours}:${minutes}`;
     }
 
     start() {
