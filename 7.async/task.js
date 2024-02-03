@@ -22,17 +22,7 @@ class AlarmClock {
     }
   
     removeClock(time) {
-        let indexToRemove = -1;
-      
-        this.alarmCollection.forEach((alarm, index) => {
-          if (alarm.time === time) {
-            indexToRemove = index;
-          }
-        });
-      
-        if (indexToRemove !== -1) {
-          this.alarmCollection.splice(indexToRemove, 1);
-        }
+        this.alarmCollection = this.alarmCollection.filter(alarm => alarm.time !== time);
       }
   
     getCurrentFormattedTime() {
